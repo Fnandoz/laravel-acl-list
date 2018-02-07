@@ -15,8 +15,8 @@ class CreateRegrasTable extends Migration
     {
         Schema::create('regras', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tiulo');
-            $table->string('Descrição');
+            $table->string('titulo');
+            $table->string('descricao');
             $table->timestamps();
         });
     }

@@ -3,43 +3,54 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Lista;
 
 class ListaController extends Controller
 {
     public function index(Request $request)
     {
-      # code...
+      $lista = Lista::all();
+      return view('lista.index', ['lista'=>$lista]);
     }
 
 
     public function novo(Request $request)
     {
-      if($request->method=='post'){
+      $item = new Lista();
+      $item->titulo = $request->titulo;
+      $item->save();
 
-      }else {
-        # code...
-      }
+      return redirect('/home/lista');
     }
 
 
     public function item(Request $request, $id)
     {
-      # code...
+      $item = Lista::find($id);
+      return view('lista.item', ['item'=>$item]);
     }
 
 
     public function atualizar(Request $request, $id)
     {
-      if($request->method=='post'){
+      $item = Lista::find($id);
+      return view('lista.atualizar', ['item'=>$item]);
 
-      }else {
-        # code...
-      }
+    }
+
+    public function atualizarItem(Request $request)
+    {
+      $item = Lista::find($request->id);
+      $item->titulo = $request->titulo;
+      $item->update();
+      return redirect('/home/lista');
     }
 
 
     public function apaga(Request $request)
     {
-      # code...
+      $item = Lista::find($request->id);
+      $item->delete();
+      return redirect('/home/lista');
     }
 }

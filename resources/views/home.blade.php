@@ -15,6 +15,18 @@
                     @endif
 
                     You are logged in!
+                    <div class="row">
+                      <div class="col-6 col-md-4">
+                        @can('lista')
+                        <a class="btn btn-primary" href="/home/lista" role="button">
+                          Lista
+                        </a>
+                        @endcan
+                        <a class="btn btn-primary" href="/home/usuario" role="button">
+                          Usuário
+                        </a>
+                      </div>
+                    </div>
                 </div>
             </div>
         </div>

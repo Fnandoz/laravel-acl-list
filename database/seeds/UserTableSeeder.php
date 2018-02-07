@@ -13,11 +13,14 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $regra_master = Regras:where('titulo', 'master')->first();
+        $regra_master = Regras::where('titulo', 'master')->first();
 
         $user = new User();
-        $user->email = 'master';
+        $user->name = "Master";
+        $user->email = 'master@master.com';
         $user->password = bcrypt('master');
         $user->save();
+
+        $user->regras()->attach($regra_master);
     }
 }
