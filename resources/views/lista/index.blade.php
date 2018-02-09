@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-  
+
   @can('cria-lista')
   <div class="row">
     <form class="form" action="/home/lista/novo" method="post">
@@ -38,6 +38,9 @@
         <div class="col col-lg-2">
           @can('atualiza-lista')
           <a href="/home/lista/{{$item->id}}/atualizar" class="btn btn-primary" role="button">Editar</a>
+          @endcan
+          @can('le-lista')
+          <a href="/home/lista/{{$item->id}}" class="btn btn-primary" role="button">Ver</a>
           @endcan
         </div>
         <div class="col col-lg-2">
