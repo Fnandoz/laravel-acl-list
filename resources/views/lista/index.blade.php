@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-
-  @can('create-list')
+  
+  @can('cria-lista')
   <div class="row">
     <form class="form" action="/home/lista/novo" method="post">
       {{csrf_field()}}
@@ -18,8 +18,17 @@
   <br>
   @endcan
 
+  @can('le-lista')
+  <form class="form-inline" action="/home/lista/busca" method="POST">
+    {{csrf_field()}}
+    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" name="termo">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+  </form>
+  <strong>{{$mensagem}}</strong>
+  @endcan
+
   <ul class="list-group">
-    @can('read-list')
+    @can('le-lista')
     @foreach ($lista as $item)
     <li class="list-group-item">
       <div class="row">
@@ -27,12 +36,12 @@
           {{$item->titulo}}
         </div>
         <div class="col col-lg-2">
-          @can('update-list')
+          @can('atualiza-lista')
           <a href="/home/lista/{{$item->id}}/atualizar" class="btn btn-primary" role="button">Editar</a>
           @endcan
         </div>
         <div class="col col-lg-2">
-          @can('delete-list')
+          @can('apaga-lista')
           <form action="/home/lista/apaga" method="post">
             {{csrf_field()}}
             <input type="hidden" name="id" value="{{$item->id}}">

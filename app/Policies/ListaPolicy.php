@@ -19,7 +19,7 @@ class ListaPolicy
      */
     public function view(User $user, Lista $lista)
     {
-        //
+        return $user->possuiAcesso(['master', 'read']);
     }
 
     /**
@@ -30,7 +30,7 @@ class ListaPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->possuiAcesso(['master', 'create']);
     }
 
     /**
@@ -42,7 +42,7 @@ class ListaPolicy
      */
     public function update(User $user, Lista $lista)
     {
-        //
+        return $user->possuiAcesso(['master', 'update']);
     }
 
     /**
@@ -54,6 +54,21 @@ class ListaPolicy
      */
     public function delete(User $user, Lista $lista)
     {
-        //
+      return $user->possuiAcesso(['master', 'delete']);
     }
+
+
+    /**
+     * Determine whether the user can use all functions the lista.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Lista  $lista
+     * @return mixed
+     */
+    public function all(User $user)
+    {
+      return $user->possuiAcesso(['master', 'create', 'read', 'update', 'delete']);
+    }
+
+
 }

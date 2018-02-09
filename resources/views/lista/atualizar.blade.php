@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-  @can('create-list')
+  @can('atualiza')
   <div class="row">
     <form class="form" action="/home/lista/atualizar" method="post">
       {{csrf_field()}}

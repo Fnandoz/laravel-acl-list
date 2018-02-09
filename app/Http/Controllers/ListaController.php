@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Lista;
+use Illuminate\Support\Facades\DB;
 
 class ListaController extends Controller
 {
     public function index(Request $request)
     {
       $lista = Lista::all();
-      return view('lista.index', ['lista'=>$lista]);
+      return view('lista.index', ['lista'=>$lista, 'mensagem'=>'']);
     }
 
 
@@ -52,5 +53,14 @@ class ListaController extends Controller
       $item = Lista::find($request->id);
       $item->delete();
       return redirect('/home/lista');
+    }
+
+    public function busca(Request $request)
+    {
+      $lista =  DB::table('listas')->where('titulo', 'like', '%'.$request->termo.'%')->get();//Lista::where('titulo', $request->termo);
+      if (strlen($request->termo)>0) {
+        return view('lista.index', ['lista'=>$lista, 'mensagem'=>'Buscando pelo termo "'.$request->termo."\""]);
+      }
+      return view('lista.index', ['lista'=>$lista, 'mensagem'=>'']);
     }
 }

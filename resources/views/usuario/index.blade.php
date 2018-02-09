@@ -10,6 +10,7 @@
         <div class="row">
           <div class="col-sm-8">
             {{$usuario->email}}
+            <span class="badge badge-primary badge-pill">{{$usuario->regras->count()}}</span>
           </div>
           <div class="col col-lg-2">
             <a href="/home/usuario/{{$usuario->id}}/" class="btn btn-primary" role="button">Ver</a>

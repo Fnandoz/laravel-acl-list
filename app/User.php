@@ -37,12 +37,34 @@ class User extends Authenticatable
 
     public function possuiAcesso($regras)
     {
-      if (is_array($regras)) {
-        return false !== $this->regras()->whereIn('titulo', $regras)->first();
-      }else{
-        return false !== $this->regras()->where('titulo', $regras)->first();
+      if(is_array($regras)){
+        return $this->checaRegras($regras) ||
+               false;
       }
+      return $this->checaRegra($regras) ||
+             false;
     }
+
+
+    /**
+     * Checa várias regras
+     * @param array $roles
+     */
+     public function checaRegras($regras)
+     {
+       return null !== $this->regras()->whereIn('titulo', $regras)->first();
+     }
+
+
+     /**
+      * Checa uma regra
+      *@param string $role
+      */
+      public function checaRegra($regra)
+      {
+        return null !== $this->regras()->where('titulo', $regra)->first();
+      }
+
 
     /**
        * Apaga todas as regras atribuidas ao usuário
